@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Apex Predator | Premium Boxing Tickets</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * {
       margin: 0;
@@ -14,36 +13,257 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background-color: #f9fafb;
+      line-height: 1.6;
     }
 
-    .hero-bg {
-      background: linear-gradient(to bottom right, #111827, #991b1b, #111827);
+    /* Header */
+    header {
+      background: linear-gradient(to right, #111827, #1f2937);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
     }
 
-    .card {
-      background: white;
+    .header-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      background-color: #dc2626;
+      padding: 0.5rem;
       border-radius: 0.5rem;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    .logo-icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: white;
     }
 
-    .btn-primary {
+    .logo-text h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .logo-text p {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #f87171;
+    }
+
+    nav a.active {
+      color: #f87171;
+    }
+
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-login {
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+    }
+
+    .btn-signup {
       background-color: #dc2626;
       color: white;
-      padding: 0.75rem 1.5rem;
+      padding: 0.6rem 1.25rem;
       border-radius: 0.375rem;
       border: none;
       cursor: pointer;
+      font-weight: 500;
+      font-size: 0.95rem;
       transition: background-color 0.2s;
     }
 
-    .btn-primary:hover {
+    .btn-signup:hover {
       background-color: #b91c1c;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to bottom right, #111827, #991b1b, #111827);
+      color: white;
+      padding: 5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.3;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #dc2626;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .hero-badge svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .hero h2 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      max-width: 600px;
+    }
+
+    .hero h2 span {
+      color: #f87171;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #d1d5db;
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 500px;
+    }
+
+    .search-input-wrapper {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-input-wrapper svg {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.25rem;
+      height: 1.25rem;
+      color: #9ca3af;
+    }
+
+    .search-input-wrapper input {
+      width: 100%;
+      height: 3rem;
+      padding-left: 2.75rem;
+      padding-right: 1rem;
+      border-radius: 0.5rem;
+      background-color: rgba(255,255,255,0.1);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .search-input-wrapper input::placeholder {
+      color: #9ca3af;
+    }
+
+    .btn-search {
+      background-color: #dc2626;
+      color: white;
+      height: 3rem;
+      padding: 0 1.5rem;
+      border-radius: 0.375rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+
+    .btn-search:hover {
+      background-color: #b91c1c;
+    }
+
+    /* Featured Events Section */
+    .section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .section-title h2 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: #111827;
+    }
+
+    .section-title p {
+      color: #4b5563;
     }
 
     .btn-outline {
@@ -53,6 +273,7 @@
       border-radius: 0.375rem;
       border: 1px solid #d1d5db;
       cursor: pointer;
+      font-weight: 500;
       transition: all 0.2s;
     }
 
@@ -60,151 +281,750 @@
       background-color: #f9fafb;
     }
 
-    .nav-link {
+    /* Event Cards Grid */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    .event-image {
+      position: relative;
+      height: 14rem;
+      background: linear-gradient(to bottom right, #1f2937, #111827);
+      overflow: hidden;
+    }
+
+    .event-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background-color: #dc2626;
       color: white;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .event-content {
+      padding: 1.5rem;
+    }
+
+    .event-content h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: #111827;
+    }
+
+    .fighters-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+
+    .fighter {
+      text-align: center;
+      flex: 1;
+    }
+
+    .fighter img {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 9999px;
+      margin: 0 auto 0.5rem;
+      object-fit: cover;
+      border: 3px solid #f3f4f6;
+    }
+
+    .fighter-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .fighter-record {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .vs-divider {
+      font-weight: 700;
+      color: #dc2626;
+      font-size: 1.25rem;
+    }
+
+    .event-details {
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      color: #4b5563;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-item svg {
+      width: 1rem;
+      height: 1rem;
+      color: #6b7280;
+    }
+
+    .event-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .price-label {
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .price {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #dc2626;
+    }
+
+    .btn-primary {
+      background-color: #dc2626;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.375rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .btn-primary:hover {
+      background-color: #b91c1c;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: linear-gradient(to right, #dc2626, #b91c1c);
+      color: white;
+      padding: 3rem 0;
+    }
+
+    .stats-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      color: #fecaca;
+      font-size: 0.95rem;
+    }
+
+    /* Upcoming Events */
+    .upcoming-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    /* Why Choose Section */
+    .why-section {
+      background-color: #111827;
+      color: white;
+      padding: 5rem 0;
+    }
+
+    .why-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .why-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .why-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .why-header p {
+      color: #9ca3af;
+      font-size: 1.125rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: #1f2937;
+      border-radius: 0.75rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      background-color: #dc2626;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+
+    .feature-icon svg {
+      width: 2rem;
+      height: 2rem;
+      color: white;
+    }
+
+    .feature-card h3 {
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      color: #9ca3af;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(to right, #dc2626, #b91c1c);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .cta-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.125rem;
+      color: #fecaca;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-white {
+      background-color: white;
+      color: #dc2626;
+      padding: 0.875rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -5px rgba(0,0,0,0.2);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1f2937;
+      color: #d1d5db;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand {
+      max-width: 300px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo-icon {
+      background-color: #dc2626;
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-logo-icon svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: white;
+    }
+
+    .footer-logo span {
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .footer-column h4 {
+      color: white;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-column a {
+      color: #d1d5db;
       text-decoration: none;
+      font-size: 0.875rem;
       transition: color 0.2s;
     }
 
-    .nav-link:hover {
-      color: #f87171;
+    .footer-column a:hover {
+      color: white;
     }
 
-    .nav-link.active {
-      color: #f87171;
+    .footer-bottom {
+      border-top: 1px solid #374151;
+      padding-top: 2rem;
+      text-align: center;
+      font-size: 0.875rem;
     }
 
-    /* Styles for the Native Dialog Backdrop */
-    dialog::backdrop {
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
-    }
-
-    /* Centering the Dialogs precisely */
+    /* Modal Styles */
     dialog {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: 1rem;
+      overflow: hidden;
+      max-width: 450px;
+      width: 90%;
+    }
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+    }
+    .modal-content {
+      background-color: white;
+      width: 100%;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.25rem;
+      color: #9ca3af;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 60;
+      line-height: 1;
+      padding: 0;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .modal-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-header p {
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 0.25rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: #dc2626;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .checkbox-group input {
+      margin-top: 0.25rem;
+      accent-color: #dc2626;
+    }
+
+    .checkbox-group label {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .checkbox-group a {
+      color: #dc2626;
+      text-decoration: underline;
+    }
+
+    .divider {
+      position: relative;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: #e5e7eb;
+    }
+
+    .divider span {
+      position: relative;
+      background-color: white;
+      padding: 0 1rem;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .social-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      border: 1px solid #e5e7eb;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: #374151;
+      transition: background-color 0.2s;
+    }
+
+    .social-btn:hover {
+      background-color: #f9fafb;
+    }
+
+    .social-btn img {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .modal-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: #4b5563;
+    }
+
+    .modal-footer button {
+      color: #dc2626;
+      font-weight: 700;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .fighters-row {
+        flex-direction: column;
+      }
+
+      .vs-divider {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+      }
     }
   </style>
 </head>
-<body class="bg-gray-50">
-  <header class="sticky top-0 z-50 shadow-lg" style="background: linear-gradient(to right, #111827, #1f2937);">
-    <div class="container mx-auto px-4 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="bg-red-600 p-2 rounded-lg">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <div>
-            <h1 class="text-2xl font-bold text-white">Apex Predator</h1>
-            <p class="text-xs text-gray-400">Premium Boxing Tickets</p>
-          </div>
-        </div>
-
-        <nav class="hidden md:flex items-center gap-6">
-          <a href="index.html" class="nav-link active">Home</a>
-          <a href="fighters.html" class="nav-link">Fighters</a>
-          <a href="tickets.html" class="nav-link">Tickets</a>
-          <a href="contact.html" class="nav-link">Contact Us</a>
-        </nav>
-
-        <div class="hidden md:flex items-center gap-3">
-          <button onclick="document.getElementById('loginModal').showModal()" class="text-white hover:text-red-400 px-4 py-2">Login</button>
-          <button onclick="document.getElementById('signupModal').showModal()" class="btn-primary">Sign Up</button>
-        </div>
-
-        <button class="md:hidden text-white">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
-        </button>
+        </div>
+        <div class="logo-text">
+          <h1>Apex Predator</h1>
+          <p>Premium Boxing Tickets</p>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-6">
+              <a href="index.html" class="nav-link active">Home</a>
+              <a href="fighters.html" class="nav-link">Fighters</a>
+              <a href="tickets.html" class="nav-link">Tickets</a>
+              <a href="contact.html" class="nav-link">Contact Us</a>
+            </nav>
+
+      <div class="auth-buttons">
+        <button class="btn-login" onclick="loginModal.showModal()">Login</button>
+        <button class="btn-signup" onclick="signupModal.showModal()">Sign Up</button>
       </div>
     </div>
   </header>
 
-  <section class="hero-bg text-white py-20 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-20">
-      <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1080&q=80" alt="Boxing Arena" class="w-full h-full object-cover">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1920&q=80" alt="Boxing Arena">
     </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span>Premium Boxing Events</span>
+      </div>
 
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="max-w-3xl">
-        <div class="inline-flex items-center gap-2 bg-red-600 px-4 py-2 rounded-full mb-6">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      <h2>Get Your Ringside Seats to <span>Epic Boxing Matches</span></h2>
+      <p>Experience the thrill of live boxing. Book your tickets now and witness champions in action.</p>
+
+      <div class="search-box">
+        <div class="search-input-wrapper">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
-          <span class="font-semibold">Premium Boxing Events</span>
+          <input type="text" placeholder="Search events, fighters, or venues...">
         </div>
-
-        <h2 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-          Get Your Ringside Seats to<br>
-          <span class="text-red-400">Epic Boxing Matches</span>
-        </h2>
-
-        <p class="text-xl text-gray-300 mb-8">
-          Experience the thrill of live boxing. Book your tickets now and witness champions in action.
-        </p>
-
-        <div class="flex gap-2 max-w-xl">
-          <div class="flex-1 relative">
-            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
-            <input type="text" placeholder="Search events, fighters, or venues..." class="w-full h-12 pl-10 pr-4 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-400">
-          </div>
-          <button class="btn-primary h-12 px-6">Search</button>
-        </div>
+        <button class="btn-search">Search</button>
       </div>
     </div>
   </section>
 
-  <section class="container mx-auto px-4 py-12">
-    <div class="flex items-center justify-between mb-8">
-      <div>
-        <h2 class="text-3xl font-bold mb-2">Featured Events</h2>
-        <p class="text-gray-600">Don't miss these championship matches</p>
+  <!-- Featured Events -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-title">
+        <h2>Featured Events</h2>
+        <p>Don't miss these championship matches</p>
       </div>
-      <button class="btn-outline hidden md:block">View All Events</button>
+      <button class="btn-outline">View All Events</button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="card overflow-hidden">
-        <div class="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900">
-          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&q=80" alt="Boxing Ring" class="w-full h-full object-cover opacity-40">
-          <div class="absolute top-4 left-4">
-            <span class="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">FEATURED</span>
-          </div>
+    <div class="events-grid">
+      <!-- Event Card 1 -->
+      <div class="event-card">
+        <div class="event-image">
+          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80" alt="Boxing Ring">
+          <span class="featured-badge">Featured</span>
         </div>
-        <div class="p-6">
-          <h3 class="text-2xl font-bold mb-3">Championship Showdown</h3>
-
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div class="text-center">
-              <img src="https://images.unsplash.com/photo-1570170609489-43197f518df0?w=400&q=80" alt="Fighter" class="w-20 h-20 rounded-full mx-auto mb-2 object-cover">
-              <div class="font-semibold text-sm">Mike "Thunder" Johnson</div>
-              <div class="text-xs text-gray-500">28-0-0 (22 KO)</div>
+        <div class="event-content">
+          <h3>Championship Showdown</h3>
+          
+          <div class="fighters-row">
+            <div class="fighter">
+              <img src="https://images.unsplash.com/photo-1570170609489-43197f518df0?w=400&q=80" alt="Fighter">
+              <div class="fighter-name">Mike "Thunder" Johnson</div>
+              <div class="fighter-record">28-0-0 (22 KO)</div>
             </div>
-            <div class="text-center">
-              <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=400&q=80" alt="Fighter" class="w-20 h-20 rounded-full mx-auto mb-2 object-cover">
-              <div class="font-semibold text-sm">Carlos "El Toro" Rodriguez</div>
-              <div class="text-xs text-gray-500">26-1-0 (20 KO)</div>
+            <div class="vs-divider">VS</div>
+            <div class="fighter">
+              <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=400&q=80" alt="Fighter">
+              <div class="fighter-name">Carlos "El Toro" Rodriguez</div>
+              <div class="fighter-record">26-1-0 (20 KO)</div>
             </div>
           </div>
 
-          <div class="space-y-2 mb-4 text-sm text-gray-600">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="event-details">
+            <div class="detail-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
               <span>March 15, 2026 • 8:00 PM EST</span>
             </div>
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="detail-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
@@ -212,45 +1032,47 @@
             </div>
           </div>
 
-          <div class="flex items-center justify-between">
+          <div class="event-footer">
             <div>
-              <div class="text-xs text-gray-500">Starting from</div>
-              <div class="text-2xl font-bold text-red-600">$75</div>
+              <div class="price-label">Starting from</div>
+              <div class="price">$75</div>
             </div>
             <button class="btn-primary">Book Now</button>
           </div>
         </div>
       </div>
 
-      <div class="card overflow-hidden">
-        <div class="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900">
-          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&q=80" alt="Boxing Ring" class="w-full h-full object-cover opacity-40">
+      <!-- Event Card 2 -->
+      <div class="event-card">
+        <div class="event-image">
+          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80" alt="Boxing Ring">
         </div>
-        <div class="p-6">
-          <h3 class="text-2xl font-bold mb-3">Battle for Glory</h3>
+        <div class="event-content">
+          <h3>Battle for Glory</h3>
 
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div class="text-center">
-              <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=400&q=80" alt="Fighter" class="w-20 h-20 rounded-full mx-auto mb-2 object-cover">
-              <div class="font-semibold text-sm">James "The Beast" Williams</div>
-              <div class="text-xs text-gray-500">24-2-0 (18 KO)</div>
+          <div class="fighters-row">
+            <div class="fighter">
+              <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=400&q=80" alt="Fighter">
+              <div class="fighter-name">James "The Beast" Williams</div>
+              <div class="fighter-record">24-2-0 (18 KO)</div>
             </div>
-            <div class="text-center">
-              <img src="https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?w=400&q=80" alt="Fighter" class="w-20 h-20 rounded-full mx-auto mb-2 object-cover">
-              <div class="font-semibold text-sm">Andre "The Lion" Silva</div>
-              <div class="text-xs text-gray-500">22-3-1 (15 KO)</div>
+            <div class="vs-divider">VS</div>
+            <div class="fighter">
+              <img src="https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?w=400&q=80" alt="Fighter">
+              <div class="fighter-name">Andre "The Lion" Silva</div>
+              <div class="fighter-record">22-3-1 (15 KO)</div>
             </div>
           </div>
 
-          <div class="space-y-2 mb-4 text-sm text-gray-600">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="event-details">
+            <div class="detail-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
               <span>March 22, 2026 • 7:00 PM PST</span>
             </div>
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="detail-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
@@ -258,10 +1080,10 @@
             </div>
           </div>
 
-          <div class="flex items-center justify-between">
+          <div class="event-footer">
             <div>
-              <div class="text-xs text-gray-500">Starting from</div>
-              <div class="text-2xl font-bold text-red-600">$50</div>
+              <div class="price-label">Starting from</div>
+              <div class="price">$50</div>
             </div>
             <button class="btn-primary">Book Now</button>
           </div>
@@ -270,122 +1092,128 @@
     </div>
   </section>
 
-  <section class="bg-gradient-to-r from-red-600 to-red-700 text-white py-12">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold mb-2">500+</div>
-          <div class="text-red-100">Events Hosted</div>
-        </div>
-        <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold mb-2">1M+</div>
-          <div class="text-red-100">Tickets Sold</div>
-        </div>
-        <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold mb-2">150+</div>
-          <div class="text-red-100">World Champions</div>
-        </div>
-        <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold mb-2">50+</div>
-          <div class="text-red-100">Venues Worldwide</div>
-        </div>
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Events Hosted</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1M+</div>
+        <div class="stat-label">Tickets Sold</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">World Champions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Venues Worldwide</div>
       </div>
     </div>
   </section>
 
-  <section class="container mx-auto px-4 py-12">
-    <div class="flex items-center justify-between mb-8">
-      <div>
-        <h2 class="text-3xl font-bold mb-2">Upcoming Events</h2>
-        <p class="text-gray-600">Get ready for these explosive upcoming bouts</p>
+  <!-- Upcoming Events -->
+  <section class="upcoming-section">
+    <div class="section-header">
+      <div class="section-title">
+        <h2>Upcoming Events</h2>
+        <p>Get ready for these explosive upcoming bouts</p>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="card overflow-hidden">
-        <div class="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900">
-          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&q=80" alt="Boxing Ring" class="w-full h-full object-cover opacity-40">
+    <div class="events-grid">
+      <!-- Event Card 3 -->
+      <div class="event-card">
+        <div class="event-image">
+          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80" alt="Boxing Ring">
         </div>
-        <div class="p-6">
-          <h3 class="text-2xl font-bold mb-3">Heavyweight Clash</h3>
+        <div class="event-content">
+          <h3>Heavyweight Clash</h3>
 
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div class="text-center">
-              <img src="https://images.unsplash.com/photo-1599058917232-d750c185967c?w=400&q=80" alt="Fighter" class="w-20 h-20 rounded-full mx-auto mb-2 object-cover">
-              <div class="font-semibold text-sm">John "The Tank" Miller</div>
-              <div class="text-xs text-gray-500">20-0-0 (18 KO)</div>
+          <div class="fighters-row">
+            <div class="fighter">
+              <img src="https://images.unsplash.com/photo-1599058917232-d750c185967c?w=400&q=80" alt="Fighter">
+              <div class="fighter-name">John "The Tank" Miller</div>
+              <div class="fighter-record">20-0-0 (18 KO)</div>
             </div>
-            <div class="text-center">
-              <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&q=80" alt="Fighter" class="w-20 h-20 rounded-full mx-auto mb-2 object-cover">
-              <div class="font-semibold text-sm">David "The Giant" Smith</div>
-              <div class="text-xs text-gray-500">19-1-0 (15 KO)</div>
+            <div class="vs-divider">VS</div>
+            <div class="fighter">
+              <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&q=80" alt="Fighter">
+              <div class="fighter-name">David "The Giant" Smith</div>
+              <div class="fighter-record">19-1-0 (15 KO)</div>
             </div>
           </div>
 
-          <div class="space-y-2 mb-4 text-sm text-gray-600">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="event-details">
+            <div class="detail-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
               <span>April 12, 2026 • 9:00 PM GMT</span>
             </div>
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="detail-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
               <span>O2 Arena, London, UK</span>
             </div>
           </div>
 
-          <div class="flex items-center justify-between">
+          <div class="event-footer">
             <div>
-              <div class="text-xs text-gray-500">Starting from</div>
-              <div class="text-2xl font-bold text-red-600">$60</div>
+              <div class="price-label">Starting from</div>
+              <div class="price">$60</div>
             </div>
             <button class="btn-primary">Remind Me</button>
           </div>
         </div>
       </div>
 
-      <div class="card overflow-hidden">
-        <div class="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900">
-          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&q=80" alt="Boxing Ring" class="w-full h-full object-cover opacity-40">
+      <!-- Event Card 4 -->
+      <div class="event-card">
+        <div class="event-image">
+          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80" alt="Boxing Ring">
         </div>
-        <div class="p-6">
-          <h3 class="text-2xl font-bold mb-3">Global Brawl</h3>
+        <div class="event-content">
+          <h3>Global Brawl</h3>
 
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div class="text-center">
-              <img src="https://images.unsplash.com/photo-1552072092-7f9b8d63efcb?w=400&q=80" alt="Fighter" class="w-20 h-20 rounded-full mx-auto mb-2 object-cover">
-              <div class="font-semibold text-sm">Li "Swift" Wei</div>
-              <div class="text-xs text-gray-500">15-0-0 (10 KO)</div>
+          <div class="fighters-row">
+            <div class="fighter">
+              <img src="https://images.unsplash.com/photo-1552072092-7f9b8d63efcb?w=400&q=80" alt="Fighter">
+              <div class="fighter-name">Li "Swift" Wei</div>
+              <div class="fighter-record">15-0-0 (10 KO)</div>
             </div>
-            <div class="text-center">
-              <img src="https://images.unsplash.com/photo-1517438476312-10d79c077509?w=400&q=80" alt="Fighter" class="w-20 h-20 rounded-full mx-auto mb-2 object-cover">
-              <div class="font-semibold text-sm">Marco "Iron" Rossi</div>
-              <div class="text-xs text-gray-500">18-2-0 (14 KO)</div>
+            <div class="vs-divider">VS</div>
+            <div class="fighter">
+              <img src="https://images.unsplash.com/photo-1517438476312-10d79c077509?w=400&q=80" alt="Fighter">
+              <div class="fighter-name">Marco "Iron" Rossi</div>
+              <div class="fighter-record">18-2-0 (14 KO)</div>
             </div>
           </div>
 
-          <div class="space-y-2 mb-4 text-sm text-gray-600">
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="event-details">
+            <div class="detail-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
               <span>May 05, 2026 • 8:00 PM JST</span>
             </div>
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="detail-item">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
               <span>Saitama Super Arena, Japan</span>
             </div>
           </div>
 
-          <div class="flex items-center justify-between">
+          <div class="event-footer">
             <div>
-              <div class="text-xs text-gray-500">Starting from</div>
-              <div class="text-2xl font-bold text-red-600">$45</div>
+              <div class="price-label">Starting from</div>
+              <div class="price">$45</div>
             </div>
             <button class="btn-primary">Remind Me</button>
           </div>
@@ -394,242 +1222,218 @@
     </div>
   </section>
 
-  <section class="bg-gray-900 text-white py-16">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Choose Apex Predator?</h2>
-        <p class="text-gray-400 text-lg">The premier platform for boxing event tickets</p>
+  <!-- Why Choose Section -->
+  <section class="why-section">
+    <div class="why-container">
+      <div class="why-header">
+        <h2>Why Choose Apex Predator?</h2>
+        <p>The premier platform for boxing event tickets</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="card bg-gray-800 p-6 text-center">
-          <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
-          <h3 class="font-bold text-xl mb-2">Premium Events</h3>
-          <p class="text-gray-400">Access to world-class boxing matches and championship fights</p>
+          <h3>Premium Events</h3>
+          <p>Access to world-class boxing matches and championship fights</p>
         </div>
 
-        <div class="card bg-gray-800 p-6 text-center">
-          <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
             </svg>
           </div>
-          <h3 class="font-bold text-xl mb-2">Secure Booking</h3>
-          <p class="text-gray-400">Safe and encrypted payment processing for your peace of mind</p>
+          <h3>Secure Booking</h3>
+          <p>Safe and encrypted payment processing for your peace of mind</p>
         </div>
 
-        <div class="card bg-gray-800 p-6 text-center">
-          <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
-          <h3 class="font-bold text-xl mb-2">Instant Tickets</h3>
-          <p class="text-gray-400">Receive your tickets immediately via email and mobile</p>
+          <h3>Instant Tickets</h3>
+          <p>Receive your tickets immediately via email and mobile</p>
         </div>
 
-        <div class="card bg-gray-800 p-6 text-center">
-          <div class="bg-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
             </svg>
           </div>
-          <h3 class="font-bold text-xl mb-2">24/7 Support</h3>
-          <p class="text-gray-400">Our dedicated team is here to help you anytime</p>
+          <h3>24/7 Support</h3>
+          <p>Our dedicated team is here to help you anytime</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="bg-gradient-to-r from-red-600 to-red-700 text-white py-16">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Experience Live Boxing?</h2>
-      <p class="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-        Don't miss out on the action. Book your tickets today and witness the greatest fighters in the ring.
-      </p>
-      <button class="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 rounded-lg text-lg font-semibold">
-        Browse Events Now
-      </button>
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2>Ready to Experience Live Boxing?</h2>
+      <p>Don't miss out on the action. Book your tickets today and witness the greatest fighters in the ring.</p>
+      <button class="btn-white">Browse Events Now</button>
     </div>
   </section>
 
-  <footer class="bg-gray-800 text-gray-300 py-8">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-        <div>
-          <div class="flex items-center gap-2 mb-4">
-            <div class="bg-red-600 p-2 rounded">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
             </div>
-            <span class="text-white font-bold text-xl">Apex Predator</span>
+            <span>Apex Predator</span>
           </div>
-          <p class="text-sm">Your premier destination for boxing event tickets worldwide.</p>
+          <p>Your premier destination for boxing event tickets worldwide.</p>
         </div>
 
-        <div>
-          <h4 class="text-white font-bold mb-4">Quick Links</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="tickets.html" class="hover:text-red-400">Browse Events</a></li>
-            <li><a href="#" class="hover:text-red-400">Fighters</a></li>
-            <li><a href="#" class="hover:text-red-400">Venues</a></li>
-            <li><a href="#" class="hover:text-red-400">About Us</a></li>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Browse Events</a></li>
+            <li><a href="#">Fighters</a></li>
+            <li><a href="#">Venues</a></li>
+            <li><a href="#">About Us</a></li>
           </ul>
         </div>
 
-        <div>
-          <h4 class="text-white font-bold mb-4">Support</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#" class="hover:text-red-400">Help Center</a></li>
-            <li><a href="contact.html" class="hover:text-red-400">Contact Us</a></li>
-            <li><a href="#" class="hover:text-red-400">FAQs</a></li>
-            <li><a href="#" class="hover:text-red-400">Refund Policy</a></li>
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Refund Policy</a></li>
           </ul>
         </div>
 
-        <div>
-          <h4 class="text-white font-bold mb-4">Legal</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#" class="hover:text-red-400">Terms of Service</a></li>
-            <li><a href="#" class="hover:text-red-400">Privacy Policy</a></li>
-            <li><a href="#" class="hover:text-red-400">Cookie Policy</a></li>
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="border-t border-gray-700 pt-6 text-center text-sm">
+      <div class="footer-bottom">
         <p>&copy; 2026 Apex Predator. All rights reserved. Experience the thrill of live boxing.</p>
       </div>
     </div>
   </footer>
 
-  <dialog id="loginModal" class="rounded-2xl shadow-2xl p-0 backdrop:bg-black/60 backdrop:backdrop-blur-sm overflow-hidden border-none outline-none">
-    <div class="bg-white w-[400px] max-w-[95vw] relative">
-      <form method="dialog">
-        <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
-      </form>
+  <!-- Login Modal -->
+  <dialog id="loginModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="loginModal.close()">&times;</button>
+      <div class="modal-body">
+        <div class="modal-header">
+          <h2>Welcome Back</h2>
+          <p>Login to your Apex Predator account</p>
+        </div>
 
-      <div class="p-8">
-        <h2 class="text-2xl font-bold text-gray-800">Welcome Back</h2>
-        <p class="text-gray-500 text-sm mb-8">Login to your Apex Predator account</p>
-
-        <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input type="email" placeholder="Enter your email" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
+        <form style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email" required>
           </div>
 
-          <div>
-            <div class="flex justify-between mb-1">
-              <label class="text-sm font-medium text-gray-700">Password</label>
-              <a href="#" class="text-sm text-red-600">Forgot password?</a>
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between;">
+              <label>Password</label>
+              <a href="#" style="font-size: 0.875rem; color: #dc2626;">Forgot password?</a>
             </div>
-            <input type="password" placeholder="Enter your password" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
+            <input type="password" placeholder="Enter your password" required>
           </div>
 
-          <button class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition-colors">
-            Login
-          </button>
+          <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
+        </form>
+
+        <div class="divider">
+          <span>OR</span>
         </div>
 
-        <div class="relative my-8 text-center">
-          <hr class="border-gray-200">
-          <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-xs text-gray-400">OR</span>
-        </div>
+        <button class="social-btn">
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+          Continue with Google
+        </button>
 
-        <div class="space-y-3">
-          <button class="w-full flex items-center justify-center gap-3 border border-gray-200 py-3 rounded-xl hover:bg-gray-50 transition-all font-medium text-gray-700">
-            <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
-            Continue with Google
-          </button>
+        <div class="modal-footer">
+          Don't have an account? <button onclick="loginModal.close(); signupModal.showModal()" style="color: #dc2626; font-weight: 700; background: none; border: none; cursor: pointer;">Sign up</button>
         </div>
-
-        <p class="text-center mt-8 text-sm text-gray-600">
-          Don't have an account? <span onclick="loginModal.close(); signupModal.showModal()" class="text-red-600 font-bold cursor-pointer">Sign up</span>
-        </p>
       </div>
     </div>
   </dialog>
 
-  <dialog id="signupModal" class="rounded-2xl shadow-2xl p-0 backdrop:bg-black/60 backdrop:backdrop-blur-sm overflow-hidden border-none outline-none">
-    <div class="bg-white w-[450px] max-w-[95vw] relative">
-      <form method="dialog">
-        <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
-      </form>
-
-      <div class="p-8">
-        <h2 class="text-2xl font-bold text-gray-800">Create Account</h2>
-        <p class="text-gray-500 text-sm mb-6">Join Apex Predator for exclusive ringside access</p>
-
-        <div class="space-y-4">
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-              <input type="text" placeholder="First Name" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-              <input type="text" placeholder="Last Name" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-            <input type="email" placeholder="email@example.com" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input type="password" placeholder="Create a password" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none">
-            <p class="text-[10px] text-gray-400 mt-1 italic">Must be at least 8 characters long.</p>
-          </div>
-
-          <div class="flex items-start gap-2 py-2">
-            <input type="checkbox" id="terms" class="mt-1 accent-red-600">
-            <label for="terms" class="text-xs text-gray-500">
-              I agree to the <a href="#" class="text-red-600 underline">Terms of Service</a> and <a href="#" class="text-red-600 underline">Privacy Policy</a>.
-            </label>
-          </div>
-
-          <button class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition-colors">
-            Create Account
-          </button>
+  <!-- Signup Modal -->
+  <dialog id="signupModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="signupModal.close()">&times;</button>
+      <div class="modal-body">
+        <div class="modal-header">
+          <h2>Create Account</h2>
+          <p>Join Apex Predator for exclusive ringside access</p>
         </div>
 
-        <div class="relative my-6 text-center">
-          <hr class="border-gray-200">
-          <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-xs text-gray-400">OR</span>
+        <form style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="First Name" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Last Name" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="email@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" placeholder="Create a password" required>
+            <p style="font-size: 0.75rem; color: #9ca3af; margin-top: 0.25rem;">Must be at least 8 characters long.</p>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</label>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%;">Create Account</button>
+        </form>
+
+        <div class="divider">
+          <span>OR</span>
         </div>
 
-        <button class="w-full flex items-center justify-center gap-3 border border-gray-200 py-3 rounded-xl hover:bg-gray-50 transition-all font-medium text-gray-700 mb-6">
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
+        <button class="social-btn">
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
           Sign up with Google
         </button>
 
-        <p class="text-center text-sm text-gray-600">
-          Already have an account? <span onclick="signupModal.close(); loginModal.showModal()" class="text-red-600 font-bold cursor-pointer">Login</span>
-        </p>
+        <div class="modal-footer">
+          Already have an account? <button onclick="signupModal.close(); loginModal.showModal()" style="color: #dc2626; font-weight: 700; background: none; border: none; cursor: pointer;">Login</button>
+        </div>
       </div>
     </div>
   </dialog>
 
-  <script>
-    const loginModal = document.getElementById('loginModal');
-    const signupModal = document.getElementById('signupModal');
-
-    // Close modals when clicking on the backdrop
-    [loginModal, signupModal].forEach(modal => {
-      modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-          modal.close();
-        }
-      });
-    });
-  </script>
 </body>
 </html>

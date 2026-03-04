@@ -4,202 +4,822 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fighters | Apex Predator</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; background-color: #f9fafb; }
 
-    .hero-bg {
-      background: linear-gradient(to bottom right, #111827, #991b1b, #111827);
+    /* Layout Utilities */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    .grid { display: grid; gap: 2rem; }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-6 { gap: 1.5rem; }
+    .gap-8 { gap: 2rem; }
+
+    @media (min-width: 768px) {
+      .md\:flex { display: flex; }
+      .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
     }
+    @media (min-width: 1024px) {
+      .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(to right, #111827, #1f2937);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    .header-inner { padding: 1rem 0; }
+    .logo-icon {
+      background: #dc2626;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      display: flex;
+    }
+    .logo-icon svg { width: 2rem; height: 2rem; color: white; }
+    .brand h1 { font-size: 1.5rem; font-weight: 700; color: white; }
+    .brand p { font-size: 0.75rem; color: #9ca3af; }
+
+    .nav-link { color: white; text-decoration: none; transition: color 0.2s; font-size: 0.875rem; }
+    .nav-link:hover, .nav-link.active { color: #f87171; }
+
+    .btn-login {
+      color: white;
+      background: none;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    .btn-login:hover { color: #f87171; }
+    .btn-primary {
+      background: #dc2626;
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #b91c1c; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(to bottom right, #111827, #991b1b, #111827);
+      color: white;
+      padding: 4rem 0;
+      position: relative;
+      text-align: center;
+    }
+    .hero h2 { font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem; }
+    .hero p { color: #d1d5db; max-width: 42rem; margin: 0 auto 2rem; }
+
+    .search-box {
+      max-width: 36rem;
+      margin: 0 auto;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      outline: none;
+    }
+    .search-box input::placeholder { color: #9ca3af; }
+    .search-box button {
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .search-box button:hover { background: #b91c1c; }
+
+    /* Filter Bar */
+    .filter-bar {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 72px;
+      z-index: 40;
+    }
+    .filter-inner {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 0;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .filter-btn {
+      background: none;
+      border: none;
+      color: #6b7280;
+      font-weight: 500;
+      cursor: pointer;
+      padding-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+    .filter-btn:hover { color: #1f2937; }
+    .filter-btn.active {
+      color: #dc2626;
+      font-weight: 700;
+      border-bottom: 2px solid #dc2626;
+    }
+
+    /* Fighter Cards */
+    main { padding: 3rem 0; }
     .fighter-card {
       background: white;
       border-radius: 1rem;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      border: 1px solid #f3f4f6;
       transition: all 0.3s ease;
     }
     .fighter-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     }
-    .stat-bar { height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden; }
-    .stat-progress { height: 100%; background: #dc2626; border-radius: 3px; }
+    .card-image {
+      position: relative;
+      height: 18rem;
+      background: #e5e7eb;
+    }
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent, transparent);
+    }
+    .card-badge {
+      position: absolute;
+      bottom: 6rem;
+      left: 1.5rem;
+      background: #dc2626;
+      color: white;
+      font-size: 0.625rem;
+      font-weight: 800;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      text-transform: uppercase;
+    }
+    .card-name {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: -0.025em;
+    }
 
-    .nav-link { color: white; text-decoration: none; transition: color 0.2s; }
-    .nav-link:hover, .nav-link.active { color: #f87171; }
+    .card-body { padding: 1.5rem; }
+    .card-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #f3f4f6;
+      padding-bottom: 1rem;
+    }
+    .stat-label {
+      font-size: 0.625rem;
+      color: #9ca3af;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+    .stat-value {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+    .stat-value span { color: #dc2626; font-size: 0.875rem; }
 
-    dialog::backdrop { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); }
-    dialog { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; }
+    .stat-bar-container {
+      height: 6px;
+      background: #e5e7eb;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 0.25rem;
+    }
+    .stat-bar-fill {
+      height: 100%;
+      background: #dc2626;
+      border-radius: 3px;
+    }
+    .stat-row { margin-bottom: 1rem; }
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #6b7280;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .btn-view {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background: #111827;
+      color: white;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-view:hover { background: #dc2626; }
+
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(to right, #dc2626, #b91c1c);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    .cta h2 { font-size: 1.875rem; font-weight: 700; margin-bottom: 1rem; }
+    .cta p {
+      font-size: 1.25rem;
+      color: #fecaca;
+      max-width: 42rem;
+      margin: 0 auto 2rem;
+    }
+    .btn-white {
+      background: white;
+      color: #dc2626;
+      padding: 0.75rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-white:hover { background: #f3f4f6; }
+
+    /* Footer */
+    footer {
+      background: #111827;
+      color: #d1d5db;
+      padding: 3rem 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .footer-brand { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+    .footer-brand-icon {
+      background: #dc2626;
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+    }
+    .footer-brand-icon svg { width: 1.5rem; height: 1.5rem; color: white; }
+    .footer-brand span { color: white; font-weight: 700; font-size: 1.25rem; }
+    footer h4 {
+      color: white;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+    footer ul { list-style: none; }
+    footer li { margin-bottom: 0.5rem; }
+    footer a {
+      color: #d1d5db;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: #f87171; }
+    .footer-bottom {
+      border-top: 1px solid #1f2937;
+      padding-top: 2rem;
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    /* Modal Styles */
+    dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: 1rem;
+      overflow: hidden;
+      max-width: 450px;
+      width: 90%;
+    }
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+    }
+    .modal-content {
+      background-color: white;
+      width: 100%;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.25rem;
+      color: #9ca3af;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 60;
+      line-height: 1;
+      padding: 0;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close:hover { color: #111827; }
+    .modal-body { padding: 2rem; }
+    .modal-header { margin-bottom: 1.5rem; }
+    .modal-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+    .modal-header p { color: #6b7280; font-size: 0.875rem; }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 0.25rem;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      outline: none;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    .form-group input:focus {
+      border-color: #dc2626;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .hint {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.25rem;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .checkbox-group input[type="checkbox"] {
+      margin-top: 0.25rem;
+      accent-color: #dc2626;
+    }
+    .checkbox-group label {
+      font-size: 0.875rem;
+      color: #4b5563;
+      line-height: 1.4;
+    }
+    .checkbox-group a { color: #dc2626; text-decoration: none; }
+    .checkbox-group a:hover { text-decoration: underline; }
+
+    .btn-submit {
+      width: 100%;
+      background: #dc2626;
+      color: white;
+      font-weight: 700;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-size: 0.875rem;
+    }
+    .btn-submit:hover { background: #b91c1c; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      color: #9ca3af;
+      font-size: 0.75rem;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e5e7eb;
+    }
+    .divider span { padding: 0 1rem; }
+
+    .social-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      background: white;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: #374151;
+      transition: background 0.2s;
+    }
+    .social-btn:hover { background: #f9fafb; }
+    .social-btn img { width: 1.25rem; height: 1.25rem; }
+
+    .modal-footer {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    .modal-footer button {
+      color: #dc2626;
+      font-weight: 700;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    .modal-footer button:hover { text-decoration: underline; }
   </style>
 </head>
-<body class="bg-gray-50">
+<body>
 
-  <header class="sticky top-0 z-50 shadow-lg" style="background: linear-gradient(to right, #111827, #1f2937);">
-    <div class="container mx-auto px-4 py-4">
+  <header>
+    <div class="container header-inner">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <a href="index.html" class="flex items-center gap-3">
-            <div class="bg-red-600 p-2 rounded-lg">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <a href="index.html" class="flex items-center gap-3" style="text-decoration: none;">
+            <div class="logo-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
             </div>
-            <div>
-              <h1 class="text-2xl font-bold text-white">Apex Predator</h1>
-              <p class="text-xs text-gray-400">Premium Boxing Tickets</p>
+            <div class="brand">
+              <h1>Apex Predator</h1>
+              <p>Premium Boxing Tickets</p>
             </div>
           </a>
         </div>
         <nav class="hidden md:flex items-center gap-6">
           <a href="homepage.html" class="nav-link">Home</a>
-          <a href="fighters.html" class="nav-link active font-bold">Fighters</a>
+          <a href="fighters.html" class="nav-link active">Fighters</a>
           <a href="tickets.html" class="nav-link">Tickets</a>
           <a href="contact.html" class="nav-link">Contact Us</a>
         </nav>
         <div class="hidden md:flex items-center gap-3">
-          <button onclick="document.getElementById('loginModal').showModal()" class="text-white hover:text-red-400 px-4 py-2">Login</button>
-          <button onclick="document.getElementById('signupModal').showModal()" class="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition">Sign Up</button>
+          <button onclick="document.getElementById('loginModal').showModal()" class="btn-login">Login</button>
+          <button onclick="document.getElementById('signupModal').showModal()" class="btn-primary">Sign Up</button>
         </div>
       </div>
     </div>
   </header>
 
-  <section class="hero-bg text-white py-16 relative">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">World Class Athletes</h2>
-      <p class="text-gray-300 max-w-2xl mx-auto mb-8">Explore the rankings and statistics of the fiercest competitors in the ring today.</p>
-      <div class="max-w-xl mx-auto relative">
-        <input type="text" placeholder="Search for a fighter..." class="w-full px-6 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-red-500">
-        <button class="absolute right-2 top-2 bg-red-600 p-2 rounded-full px-6 hover:bg-red-700 transition">Search</button>
+  <section class="hero">
+    <div class="container">
+      <h2>World Class Athletes</h2>
+      <p>Explore the rankings and statistics of the fiercest competitors in the ring today.</p>
+      <div class="search-box">
+        <input type="text" placeholder="Search for a fighter...">
+        <button>Search</button>
       </div>
     </div>
   </section>
 
-  <div class="bg-white border-b sticky top-[72px] z-40">
-    <div class="container mx-auto px-4">
-      <div class="flex items-center justify-center gap-8 py-4 overflow-x-auto whitespace-nowrap">
-        <button class="text-red-600 font-bold border-b-2 border-red-600 pb-1">All Divisions</button>
-        <button class="text-gray-500 hover:text-gray-800 font-medium transition">P4P Rankings</button>
-        <button class="text-gray-500 hover:text-gray-800 font-medium transition">Heavyweight</button>
-        <button class="text-gray-500 hover:text-gray-800 font-medium transition">Lightweight</button>
-        <button class="text-gray-500 hover:text-gray-800 font-medium transition">Welterweight</button>
+  <div class="filter-bar">
+    <div class="container">
+      <div class="filter-inner">
+        <button class="filter-btn active">All Divisions</button>
+        <button class="filter-btn">P4P Rankings</button>
+        <button class="filter-btn">Heavyweight</button>
+        <button class="filter-btn">Lightweight</button>
+        <button class="filter-btn">Welterweight</button>
       </div>
     </div>
   </div>
 
-  <main class="container mx-auto px-4 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="fighter-card overflow-hidden border border-gray-100">
-        <div class="relative h-72 bg-gray-200">
-          <img src="https://images.unsplash.com/photo-1599058917232-d750c185967c?w=600&q=80" alt="Fighter" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-6">
-            <span class="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded mb-2 inline-block">CHAMPION</span>
-            <h3 class="text-2xl font-bold text-white uppercase tracking-tight">Mike "Thunder" Johnson</h3>
-          </div>
+  <main class="container">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3">
+      <div class="fighter-card">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1599058917232-d750c185967c?w=600&q=80" alt="Fighter">
+          <div class="card-overlay"></div>
+          <span class="card-badge">Champion</span>
+          <h3 class="card-name">Mike "Thunder" Johnson</h3>
         </div>
-        <div class="p-6">
-          <div class="flex justify-between mb-6 border-b border-gray-100 pb-4">
+        <div class="card-body">
+          <div class="card-stats">
             <div>
-              <p class="text-[10px] text-gray-400 uppercase font-black">Record</p>
-              <p class="text-lg font-bold text-gray-800">28-0-0 <span class="text-red-600 text-sm">(22 KO)</span></p>
+              <p class="stat-label">Record</p>
+              <p class="stat-value">28-0-0 <span>(22 KO)</span></p>
             </div>
-            <div class="text-right">
-              <p class="text-[10px] text-gray-400 uppercase font-black">Division</p>
-              <p class="text-lg font-bold text-gray-800">Heavyweight</p>
+            <div style="text-align: right;">
+              <p class="stat-label">Division</p>
+              <p class="stat-value">Heavyweight</p>
             </div>
           </div>
-          <div class="space-y-4 mb-6">
-            <div>
-              <div class="flex justify-between text-xs mb-1 font-bold text-gray-500 uppercase"><span>Power</span><span>95%</span></div>
-              <div class="stat-bar"><div class="stat-progress" style="width: 95%"></div></div>
+          <div class="stat-row">
+            <div class="stat-header">
+              <span>Power</span>
+              <span>95%</span>
             </div>
-            <div>
-              <div class="flex justify-between text-xs mb-1 font-bold text-gray-500 uppercase"><span>Speed</span><span>82%</span></div>
-              <div class="stat-bar"><div class="stat-progress" style="width: 82%"></div></div>
+            <div class="stat-bar-container">
+              <div class="stat-bar-fill" style="width: 95%"></div>
             </div>
           </div>
-          <button class="w-full py-3 rounded-xl bg-gray-900 text-white font-bold hover:bg-red-600 transition-all duration-300">View Full Profile</button>
+          <div class="stat-row">
+            <div class="stat-header">
+              <span>Speed</span>
+              <span>82%</span>
+            </div>
+            <div class="stat-bar-container">
+              <div class="stat-bar-fill" style="width: 82%"></div>
+            </div>
+          </div>
+          <button class="btn-view" style="margin-top: 1.5rem;">View Full Profile</button>
         </div>
       </div>
 
+      <!-- Add more fighter cards here -->
+      <div class="fighter-card">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&q=80" alt="Fighter">
+          <div class="card-overlay"></div>
+          <span class="card-badge" style="background: #1f2937;">Contender</span>
+          <h3 class="card-name">Carlos "Lightning" Ruiz</h3>
+        </div>
+        <div class="card-body">
+          <div class="card-stats">
+            <div>
+              <p class="stat-label">Record</p>
+              <p class="stat-value">24-2-0 <span>(18 KO)</span></p>
+            </div>
+            <div style="text-align: right;">
+              <p class="stat-label">Division</p>
+              <p class="stat-value">Welterweight</p>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-header">
+              <span>Power</span>
+              <span>88%</span>
+            </div>
+            <div class="stat-bar-container">
+              <div class="stat-bar-fill" style="width: 88%"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-header">
+              <span>Speed</span>
+              <span>94%</span>
+            </div>
+            <div class="stat-bar-container">
+              <div class="stat-bar-fill" style="width: 94%"></div>
+            </div>
+          </div>
+          <button class="btn-view" style="margin-top: 1.5rem;">View Full Profile</button>
+        </div>
       </div>
+
+      <div class="fighter-card">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=600&q=80" alt="Fighter">
+          <div class="card-overlay"></div>
+          <span class="card-badge" style="background: #b45309;">Rising Star</span>
+          <h3 class="card-name">Sarah "Storm" Chen</h3>
+        </div>
+        <div class="card-body">
+          <div class="card-stats">
+            <div>
+              <p class="stat-label">Record</p>
+              <p class="stat-value">15-0-0 <span>(12 KO)</span></p>
+            </div>
+            <div style="text-align: right;">
+              <p class="stat-label">Division</p>
+              <p class="stat-value">Lightweight</p>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-header">
+              <span>Power</span>
+              <span>78%</span>
+            </div>
+            <div class="stat-bar-container">
+              <div class="stat-bar-fill" style="width: 78%"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-header">
+              <span>Speed</span>
+              <span>96%</span>
+            </div>
+            <div class="stat-bar-container">
+              <div class="stat-bar-fill" style="width: 96%"></div>
+            </div>
+          </div>
+          <button class="btn-view" style="margin-top: 1.5rem;">View Full Profile</button>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <section class="bg-gradient-to-r from-red-600 to-red-700 text-white py-16">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Experience Live Boxing?</h2>
-      <p class="text-xl text-red-100 mb-8 max-w-2xl mx-auto">Book your tickets today and witness the greatest fighters in the ring.</p>
-      <button class="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 rounded-lg text-lg font-semibold transition">Browse Events Now</button>
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Experience Live Boxing?</h2>
+      <p>Book your tickets today and witness the greatest fighters in the ring.</p>
+      <button class="btn-white">Browse Events Now</button>
     </div>
   </section>
 
-  <footer class="bg-gray-900 text-gray-300 py-12">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
         <div>
-          <div class="flex items-center gap-2 mb-4">
-            <div class="bg-red-600 p-2 rounded"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-            <span class="text-white font-bold text-xl">Apex Predator</span>
+          <div class="footer-brand">
+            <div class="footer-brand-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <span>Apex Predator</span>
           </div>
-          <p class="text-sm">Your premier destination for boxing event tickets worldwide.</p>
+          <p style="font-size: 0.875rem;">Your premier destination for boxing event tickets worldwide.</p>
         </div>
         <div>
-          <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Quick Links</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#" class="hover:text-red-400 transition">Browse Events</a></li>
-            <li><a href="fighters.html" class="hover:text-red-400 transition">Fighters</a></li>
-            <li><a href="#" class="hover:text-red-400 transition">Venues</a></li>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Browse Events</a></li>
+            <li><a href="fighters.html">Fighters</a></li>
+            <li><a href="#">Venues</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Support</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#" class="hover:text-red-400 transition">Help Center</a></li>
-            <li><a href="contact.html" class="hover:text-red-400 transition">Contact Us</a></li>
-            <li><a href="#" class="hover:text-red-400 transition">FAQs</a></li>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="#">FAQs</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Legal</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#" class="hover:text-red-400 transition">Terms of Service</a></li>
-            <li><a href="#" class="hover:text-red-400 transition">Privacy Policy</a></li>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-gray-800 pt-8 text-center text-sm">
+      <div class="footer-bottom">
         <p>&copy; 2026 Apex Predator. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <dialog id="loginModal" class="rounded-2xl shadow-2xl p-0 overflow-hidden border-none outline-none">
-    <div class="bg-white w-[400px] p-8 relative">
-      <form method="dialog"><button class="absolute top-4 right-4 text-gray-400 hover:text-black">&times;</button></form>
-      <h2 class="text-2xl font-bold mb-2">Welcome Back</h2>
-      <p class="text-gray-500 text-sm mb-6">Login to your account</p>
-      <input type="email" placeholder="Email" class="w-full px-4 py-3 bg-gray-50 border rounded-xl mb-4 outline-none focus:ring-2 focus:ring-red-500">
-      <input type="password" placeholder="Password" class="w-full px-4 py-3 bg-gray-50 border rounded-xl mb-6 outline-none focus:ring-2 focus:ring-red-500">
-      <button class="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition">Login</button>
+  <!-- Login Modal -->
+  <dialog id="loginModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="document.getElementById('loginModal').close()">&times;</button>
+      <div class="modal-body">
+        <div class="modal-header">
+          <h2>Welcome Back</h2>
+          <p>Login to access your account and tickets</p>
+        </div>
+        <form onsubmit="event.preventDefault(); document.getElementById('loginModal').close();">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="email@example.com" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" placeholder="Enter your password" required>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: #4b5563; cursor: pointer;">
+              <input type="checkbox" style="accent-color: #dc2626;"> Remember me
+            </label>
+            <a href="#" style="font-size: 0.875rem; color: #dc2626; text-decoration: none;">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn-submit">Login</button>
+        </form>
+        <div class="divider"><span>OR</span></div>
+        <button class="social-btn">
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+          Continue with Google
+        </button>
+        <div class="modal-footer">
+          Don't have an account?
+          <button onclick="document.getElementById('loginModal').close(); document.getElementById('signupModal').showModal()">Sign up</button>
+        </div>
+      </div>
     </div>
   </dialog>
 
-  <dialog id="signupModal" class="rounded-2xl shadow-2xl p-0 overflow-hidden border-none outline-none">
-    <div class="bg-white w-[400px] p-8 relative">
-      <form method="dialog"><button class="absolute top-4 right-4 text-gray-400 hover:text-black">&times;</button></form>
-      <h2 class="text-2xl font-bold mb-2">Create Account</h2>
-      <p class="text-gray-500 text-sm mb-6">Join for exclusive access</p>
-      <input type="text" placeholder="Full Name" class="w-full px-4 py-3 bg-gray-50 border rounded-xl mb-4 outline-none focus:ring-2 focus:ring-red-500">
-      <input type="email" placeholder="Email" class="w-full px-4 py-3 bg-gray-50 border rounded-xl mb-4 outline-none focus:ring-2 focus:ring-red-500">
-      <input type="password" placeholder="Password" class="w-full px-4 py-3 bg-gray-50 border rounded-xl mb-6 outline-none focus:ring-2 focus:ring-red-500">
-      <button class="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition">Sign Up</button>
+  <!-- Signup Modal -->
+  <dialog id="signupModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="document.getElementById('signupModal').close()">&times;</button>
+      <div class="modal-body">
+        <div class="modal-header">
+          <h2>Create Account</h2>
+          <p>Join Apex Predator for exclusive ringside access</p>
+        </div>
+        <form onsubmit="event.preventDefault(); document.getElementById('signupModal').close();">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="First Name" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Last Name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="email@example.com" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" placeholder="Create a password" required>
+            <p class="hint">Must be at least 8 characters long.</p>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</label>
+          </div>
+          <button type="submit" class="btn-submit">Create Account</button>
+        </form>
+        <div class="divider"><span>OR</span></div>
+        <button class="social-btn">
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+          Sign up with Google
+        </button>
+        <div class="modal-footer">
+          Already have an account?
+          <button onclick="document.getElementById('signupModal').close(); document.getElementById('loginModal').showModal()">Login</button>
+        </div>
+      </div>
     </div>
   </dialog>
 
   <script>
+    // Close modal when clicking outside
     const modals = [document.getElementById('loginModal'), document.getElementById('signupModal')];
-    modals.forEach(m => m.addEventListener('click', e => e.target === m && m.close()));
+    modals.forEach(m => m.addEventListener('click', e => {
+      if (e.target === m) m.close();
+    }));
   </script>
 </body>
 </html>
